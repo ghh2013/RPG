@@ -12,10 +12,24 @@ public class PalyerMove : MonoBehaviour
     float velocityY;
     float jumpPower = 10;
     int jumpcount = 0;
+
+    
+
+    
+    Animator anim;
+
+    int hp = 100;
+    int att = 5;
+    
+    float attTime = 2f;
+    float timer = 0f;
     // Start is called before the first frame update
     void Start()
     {
+        
+       
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -23,7 +37,7 @@ public class PalyerMove : MonoBehaviour
     {
         Move();
     }
-
+    
     private void Move()
     {
         float h = Input.GetAxis("Horizontal");
