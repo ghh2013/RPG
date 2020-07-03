@@ -47,4 +47,29 @@ public class PlayerFire : MonoBehaviour
             rb.AddForce(dir * throwPower, ForceMode.Impulse);
         }
     }
+
+    public void OnFireButtonClick()
+    {
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            print("충돌오브젝트:" + hitInfo.collider.name);
+
+            GameObject bulletImpact = Instantiate(bulletImpactFactory);
+            bulletImpact.transform.position = hitInfo.point;
+            bulletImpact.transform.forward = hitInfo.normal;
+        }
+    }
+
+    public void OnGrenadeButtonClick()
+    {
+        GameObject bomb = Instantiate(bombFactory);
+        bomb.transform.position = firePoint.transform.position;
+        Rigidbody rb = bomb.GetComponent<Rigidbody>();
+
+        Vector3 dir = Camera.main.transform.forward + Camera.main.transform.up;
+        dir.Normalize();
+        rb.AddForce(dir * throwPower, ForceMode.Impulse);
+    }
 }
